@@ -24,7 +24,7 @@ public class CameraFollow : MonoBehaviour {
 
 	void Start () {
 		
-		//Assign the player gameobject to the transform target here.
+		target = GameObject.FindGameObjectWithTag(MyTags.PLAYER_TAG).transform;
 		
 		offsetZ = (transform.position - target.position).z;
 		followsPlayer = true;
@@ -48,39 +48,3 @@ public class CameraFollow : MonoBehaviour {
 
 
 } // class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
