@@ -102,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.Space)) {
 				jumped = true;
 				myBody.linearVelocity = new Vector2 (myBody.linearVelocity.x, jumpPower);
+
 				anim.SetBool ("Jump", true);
 			}
 		}

@@ -1,98 +1,29 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
+ 
 public class PlayerDamage : MonoBehaviour {
-
-	private Text lifeText;
-	private int lifeScoreCount;
-
-	private bool canDamage;
-
-	void Awake () {
-		lifeText = GameObject.Find ("LifeText").GetComponent<Text> ();
-		lifeScoreCount = 3;
-		lifeText.text = "x" + lifeScoreCount;
-
-		canDamage = true;
-	}
-
-	void Start() {
-		Time.timeScale = 1f;
-	}
-	
+ 
+	public float invincibleSeconds = 2f; // How long before the player can be hit again.
+ 
+	private bool canDamage = true;
+ 
+	// Called by every enemy/boss (Spider, Egg, Snail, Frog, Stone).
 	public void DealDamage() {
-		if (canDamage) {
-			
-			lifeScoreCount--;
-
-			if (lifeScoreCount >= 0) {
-				lifeText.text = "x" + lifeScoreCount;
-			}
-
-			if (lifeScoreCount == 0) {
-				// RESTART THE GAME
-				Time.timeScale = 0f;
-				StartCoroutine(RestartGame());
-			}
-
-			canDamage = false;
-
-			StartCoroutine (WaitForDamage ());
+		if (!canDamage) return;
+ 
+		canDamage = false;
+ 
+		if (GameManager.instance != null) {
+			GameManager.instance.TakeEnemyDamage(); 
 		}
+ 
+		StartCoroutine(InvincibilityWindow());
 	}
-
-	IEnumerator WaitForDamage() {
-		yield return new WaitForSeconds (2f);
+ 
+	IEnumerator InvincibilityWindow() {
+		yield return new WaitForSeconds(invincibleSeconds);
 		canDamage = true;
 	}
-
-	IEnumerator RestartGame() {
-		yield return new WaitForSecondsRealtime(2f);
-		SceneManager.LoadScene ("Gameplay");
-	}
-
+ 
 } // class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
