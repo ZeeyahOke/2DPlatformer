@@ -22,7 +22,7 @@ A 2D platformer built in Unity from an inherited, deliberately incomplete codeba
 - Water death: respawn while lives remain, otherwise show the end scene with Replay and Quit. Respawn happens near the water the player entered, not back at the start.
 - Countdown timer displayed in `mm:ss`, with a time penalty applied on each death.
 - Boss fight with tunable health and a health bar above the boss; defeating the boss wins the game.
-- Main menu with a Play button.
+- Main menu with a Play button and Settings button.
 
 ## Project structure
 
